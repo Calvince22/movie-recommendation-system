@@ -6,6 +6,47 @@ import click
 engine = create_engine("sqlite:///movie_rcmdn.db", echo=True)
 Session = sessionmaker(bind=engine)
 
+def show_menu():
+    while True:
+        click.echo("\n🎬 MOVIE WATCHLIST & REVIEW MANAGER 🎬")
+        click.echo("1. Add User")
+        click.echo("2. Add Movie")
+        click.echo("3. List Movies")
+        click.echo("4. Mark Movie as Watched")
+        click.echo("5. Write/Edit Review")
+        click.echo("6. List Reviews")
+        click.echo("7. Recommend Movie by Genre")
+        click.echo("8. List Watched Movies")
+        click.echo("9. List Users")
+        click.echo("0. Exit")
+
+        choice = click.prompt("\nEnter the number of your choice", type=int)
+
+        if choice == 1:
+            add_user()
+        elif choice == 2:
+            add_movie()
+        elif choice == 3:
+            list_movies()
+        elif choice == 4:
+            mark_watched()
+        elif choice == 5:
+            write_review()
+        elif choice == 6:
+            list_reviews()
+        elif choice == 7:
+            recommend_movie()
+        elif choice == 8:
+            list_movie_watched()
+        elif choice == 9:
+            list_user()
+        elif choice == 0:
+            click.echo("Goodbye! 🎬")
+            break
+        else:
+            click.echo("Invalid choice. Please enter a number between 0-9.")
+
+
 @click.group()
 def cli():
     """CLI for the Movie Watchlist & Review Manager"""
@@ -171,4 +212,4 @@ def delete_review(user_id, title):
     session.close()
 
 if __name__ == "__main__":
-    cli()
+    show_menu()

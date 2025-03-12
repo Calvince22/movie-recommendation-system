@@ -11,8 +11,8 @@ class User(Base):
     name = Column(String(), nullable=False)
     email = Column(String(), nullable=False, unique=True)
 
-    reviews = relationship("Review", back_populates="user", cascade="all, delete-orphan")
-    recommendations = relationship("Recommendation", back_populates="user", cascade="all, delete-orphan")
+    reviews = relationship("Review", back_populates="user")
+    recommendations = relationship("Recommendation", back_populates="user")
 
     def __repr__(self):
         return f"<User(name={self.name}, email={self.email})>"
@@ -28,8 +28,8 @@ class Movie(Base):
     watched = Column(Boolean, default=False)
     rating = Column(Float, nullable=True)  # Optional rating
 
-    reviews = relationship("Review", back_populates="movie", cascade="all, delete-orphan")
-    recommendations = relationship("Recommendation", back_populates="movie", cascade="all, delete-orphan")
+    reviews = relationship("Review", back_populates="movie")
+    recommendations = relationship("Recommendation", back_populates="movie")
 
     def __repr__(self):
         return f"<Movie(title={self.title}, genre={self.genre}, release_year={self.release_year})>"
